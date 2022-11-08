@@ -19,14 +19,15 @@ function createPromise(position, delay) {
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
-  const { elements: delay, step, amount } = event.currentTarget;
+  console.log(event.currentTarget.elements);
+  const { delay, step, amount } = event.currentTarget.elements;
 
-  let numberOfDelay = Number(delay[0].value);
+  let numberOfDelay =Number(delay.value);
   let numberOfStep = Number(step.value);
   
   for (let i = 1; i <= amount.value; i += 1) { 
    
-     createPromise((i), numberOfDelay)
+     createPromise(i, numberOfDelay)
       .then(({ position,  delay}) => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
@@ -34,7 +35,9 @@ formEl.addEventListener('submit', event => {
        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 
       })
-    
-    numberOfDelay += numberOfStep;
+      numberOfDelay+=numberOfStep
   }
+  
 });
+
+

@@ -1,26 +1,25 @@
-const startBtnEl = document.querySelector('[data-start]');
-const stopBtnEl = document.querySelector('[data-stop]');
-const bodyEl = document.querySelector('body');
+const color = document.querySelector('body');
+const btnStart = document.querySelector('button[data-start]');
+const btnStop = document.querySelector('button[data-stop]');
+
 
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  }
 
-let timerId;
+ 
+  let timerId = null;
 
-const onChangeThemeClick = () => {
-    startBtnEl.setAttribute('disabled', 'true')
-    stopBtnEl.removeAttribute('disabled')
-    timerId = setInterval(() => {
-        bodyEl.style.backgroundColor = getRandomHexColor();
-    }, 1000);
+  const on =()=>{timerId = setInterval(() => {
+  color.style.background = getRandomHexColor();
+},1000);
+btnStart.disabled = true;
 
-}
+  }
 
-startBtnEl.addEventListener('click', onChangeThemeClick);
+  btnStart.addEventListener('click', on );
 
-stopBtnEl.addEventListener('click', () => {
-    startBtnEl.removeAttribute('disabled')
-    stopBtnEl.setAttribute('disabled', 'true')
+  btnStop.addEventListener('click', () => {
+    btnStart.disabled = false; 
     clearInterval(timerId);
-})
+  });
